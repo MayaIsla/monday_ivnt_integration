@@ -14,7 +14,7 @@ PN = "Project # "
 
 datetime_Format = "{:%Y-%m-%d}".format(datetime.now())
 
-newpath = "C:/Users/misl7603/Desktop/Scripts/Monday/" + "Logs_" + datetime_Format
+newpath = "C:/Monday/" + "Logs_" + datetime_Format
 if not os.path.exists(newpath):
     os.makedirs(newpath)
 
