@@ -99,10 +99,3 @@ for proj_number_iterator, project_variable in zip(parsed_groupings['Project Numb
                     else:
                         print("idk..")
                         changed_today_columns.to_csv('result_ERROR'+'_' + datetime_Format + '.csv', index=False)
-
-        
-
-
-
-
-
