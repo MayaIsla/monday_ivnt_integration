@@ -14,11 +14,21 @@ PN = "Project # "
 
 datetime_Format = "{:%Y-%m-%d}".format(datetime.now())
 
+newpath = "C:/Users/misl7603/Desktop/Scripts/Monday/" + "Logs_" + datetime_Format
+if not os.path.exists(newpath):
+    os.makedirs(newpath)
 
-api__Key = "MONDAY-API-KEY-HERE"
+with open('C:/Monday/monday_encode.txt', 'rb') as monday_key:
+  coded_string_monday = monday_key.read()
+monday_api__Key = base64.b64decode(coded_string_monday).decode('utf-8')
+
+with open('C:/Monday/ivnt_encode.txt', 'rb') as monday_key:
+  coded_string_ivnt = monday_key.read()
+ivnt_api__Key = base64.b64decode(coded_string_ivnt).decode('utf-8')
+
 api__URI = "https://api.monday.com/v2"
 
-monday_headers = {"Authorization" : api__Key,  "API-Version" : "2023-04"}
+monday_headers = {"Authorization" : monday_api__Key,  "API-Version" : "2023-04"}
 
 search__Query_board_items = 'query {boards (ids: 6739613863) {groups {id title}}}' #Queries all groups in a board. Includes groupID which you can use to query next variable.
 data_board_item = {'query': search__Query_board_items}
@@ -62,7 +72,7 @@ for proj_number_iterator, project_variable in zip(parsed_groupings['Project Numb
         else:
             ivanti_url = "https://demo.saasit.com/api/odata/businessobject/Frs_Projects?$filter=ProjectNumber eq" + " " + proj_number_iterator
             print(ivanti_url)
-            iv_auth_header = {'Authorization': 'rest_api_key=IVNT-API-KEY-HERE'}
+            iv_auth_header = {'Authorization': ivnt_api__Key}
 
             request_iv_get_recID = requests.get(url=ivanti_url, headers=iv_auth_header)
             request_iv_get_recID_text = request_iv_get_recID.text
